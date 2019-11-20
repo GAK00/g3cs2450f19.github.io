@@ -1,4 +1,6 @@
-var rowCount = 7;
+var rowCount = 2;
+var level = 1;
+var problem = 0;
 
 (function()
 {
@@ -7,6 +9,7 @@ var rowCount = 7;
 		{
             clearInterval(stateCheck);
             addBeads(rowCount);
+			document.getElementById("display-question").innerHTML = levels["level_1"][0][0]
 		}
 	}, 100);
 })();
@@ -57,7 +60,7 @@ function setupBeads(rowCount)
     {
         for(var j = 1; j <= 7; j++)
         {
-            document.getElementById("bead-" + i + "-" + j).onclick = function() {shiftBeads(this.id)};
+            document.getElementById("bead-" + i + "-" + j).onclick = function() {shiftBeads(this.id);document.getElementById("input").value = null;};
         }
     }
     colorBeads(rowCount);
@@ -90,4 +93,8 @@ function connectButtons()
         }
     });
     document.getElementById("nav-reset").onclick = function() {reset()};
+	document.getElementById("nav-exercises").onclick = function(){show_screen('Exercises', this)};
+	document.getElementById("nav-practice").onclick = function(){show_screen('Practice', this)};
+	document.getElementById("nav-show").onclick = function(){document.getElementById("input").value = calculate_value()};
+	document.getElementById("nav-submit").onclick = function(){submit_answer()};
 }

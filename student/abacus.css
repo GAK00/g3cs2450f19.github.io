@@ -111,8 +111,29 @@ body {
     width: 100px;
 }
 
+.button_selected
+{
+	background-color: #047878;
+}
+
+.format_box_of_lazy
+{
+    opacity: 0;
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 .button:hover {
     cursor: pointer;
+}
+
+.format_box_of_lazy:hover
+{
+	cursor: auto;
 }
 
 .display-box {

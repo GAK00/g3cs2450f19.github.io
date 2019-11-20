@@ -44,6 +44,7 @@ function shiftBeads(beadId)
     newSpace.classList.add("grow-space");
     oldSpace.classList.add("space-shrink");
     newSpace.classList.add("space-grow");
+	console.log(calculate_value());
 }
 
 function solve()
@@ -116,4 +117,80 @@ function hasClass(div, className)
         }
     }
     return returnVal;
+}
+
+//handles switching the buttons for each screen
+function show_screen(name, sender)
+{
+	for ( var child of document.getElementById("left-sidebar").childNodes)
+	{
+		if(child.className && child.className.includes("button"))
+		{
+			child.className = "button";
+		}
+	}
+	sender.className = "button button_selected";
+	for ( var child of document.getElementById("right-sidebar").childNodes)
+	{
+		if(child.id != "nav-reset")child.style = "display: none";
+	}
+	document.getElementById("display-mode").innerHTML = name;
+	document.getElementById("display-mode").style = "display: block"
+	name = name.toLowerCase() + "-opts";
+	document.getElementById(name).style = "display: block";
+	document.getElementById("input").value = null;
+	reset()
+}
+
+//really bad gets the value of the buttons
+function calculate_value()
+{
+	var row_val = rowCount - 1;
+	var total_val = 0;
+	for (row of document.getElementById("abacus-bottom").childNodes)
+	{
+		var col_val = 0;
+		for(bead of row.childNodes)
+		{
+			if(bead.className.includes("grow-space")) break;
+			if(bead.className.includes("bead")) col_val++;
+		}
+		total_val += col_val * Math.pow(10, row_val)
+		row_val --;
+	}
+	var row_val = rowCount - 1;
+	for (row of document.getElementById("abacus-top").childNodes)
+	{
+		var col_val = 2;
+		for(bead of row.childNodes)
+		{
+			if(bead.className.includes("grow-space")) break;
+			if(bead.className.includes("bead")) col_val--;
+		}
+		total_val += col_val * Math.pow(10, row_val) * 5
+		row_val --;
+	}
+	return total_val;
+}
+
+function submit_answer()
+{
+	let answer = calculate_value();
+	let correct_answer = levels["level_1"][problem][1];
+	if(answer != correct_answer) document.getElementById("nav-submit").innerHTML = "<p style=\"color:red; margin : auto\">Incorrect</p>"
+	else
+	{
+		document.getElementById("nav-submit").innerHTML = "<p style=\"color:green; margin : auto\">Correct</p>"
+		problem++;
+		if(problem >= levels["level_1"].length)
+		{
+			document.getElementById("display-question").innerHTML = "level 1 complete";
+			document.getElementById("nav-submit").onclick = null;
+		}
+		else
+		{
+			document.getElementById("display-question").innerHTML = levels["level_1"][problem][0]
+		}
+	}
+	setTimeout(() => {document.getElementById("nav-submit").innerHTML = "Submit";}, 2000);
 }

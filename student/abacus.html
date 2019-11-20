@@ -5,6 +5,7 @@
     <title>Abacus</title>
     
     <link rel="stylesheet" type="text/css" href="abacus.css">
+	<script src="problems.json"></script>
     <script src="setup.js"></script>
     <script src="abacus.js"></script>
   </head>
@@ -15,8 +16,7 @@
 <!--        left-sidebar-->
         <div id="level">Level: 1</div>
         <div id="nav-exercises" class="button">Exercises</div>
-        <div id="nav-practice" class="button">Practice</div>
-        <div id="nav-test" class="button">Test</div>
+        <div id="nav-practice" class="button button_selected">Practice</div>
       </div>
       <div id="abacus-container">
         <div id="abacus">
@@ -30,18 +30,24 @@
       </div>
       <div id="right-sidebar">
 <!--        right-sidebar-->
-        <div id="display-mode" class="display-box">Test</div>
-        <p>Question:</p>
-        <div id="display-question" class="display-box">15 + 9</div>
-        <div id="input-div" class="display-box">
-          <input id="input" type="number" name="input">
-        </div>
-        <div id="nav-solve" class="button">Solve</div>
-        <div id="nav-prev" class="button">Prev</div>
-        <div id="nav-next" class="button">Next</div>
-        <div id="nav-submit" class="button">Submit</div>
+		<div id="display-mode" class="display-box">Practice</div>
+		<div id="exercises-opts"  style="display: none;">
+			<p>Question:</p>
+			<div id="display-question" class="display-box">15 + 9</div>
+			<div class="button format_box_of_lazy">BLANK</div>
+			<div class="button format_box_of_lazy">BLANK</div>
+			<div id="nav-submit" class="button">Submit</div>
+		</div>
+		<div id="practice-opts"  style="display: box;">
+			<p>Current Value:</p>
+			<div id="input-div" class="display-box">
+				<input id="input" type="number" name="input">
+			</div>
+			<div id="nav-solve" class="button">Solve</div>
+			<div id="nav-show" class="button">Show</div>
+			<div class="button format_box_of_lazy">BLANK</div>
+		</div>
         <div id="nav-reset" class="button">Reset</div>
-      </div>
     </div>
         
   </body>
